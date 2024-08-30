@@ -10,7 +10,7 @@ setup(
     description="Units in Python",
     author="Carlos Raymundo",
     author_email="carlos.raymundo.luyo@gmail.com",
-    url="https://github.com/ray36512/pmd_unit/Unum",
+    url="https://github.com/ray36512/pmd_unit",
     license="LGPL",
     install_requires=[
         'six'
