@@ -383,27 +383,7 @@ class Unum(object):
 
         return s, o
 
-    def as_unit(self, target_unit):
-        """
-        Convertir la unidad actual a la unidad objetivo.
-        
-        :param target_unit: Unidad objetivo a la que se desea convertir.
-        :return: Un nuevo Unum con la unidad convertida.
-        """
-        if not isinstance(target_unit, Unum):
-            raise ValueError("target_unit debe ser una instancia de Unum")
-
-        # Obtener la definición de la unidad objetivo
-        target_definition = UNIT_TABLE.get_definition(target_unit)
-
-        # Verificar si la unidad objetivo está en la tabla de unidades
-        if target_definition is None:
-            raise ValueError(f"La unidad {target_unit} no está definida")
-
-        # Realizar la conversión
-        converted_value = self.number() * (1 / target_definition.number())
-        return Unum(converted_value, target_unit._unit)
-
+  
     def as_unit(self, target_unit):
         """
         Convertir la unidad actual a la unidad objetivo.
