@@ -383,26 +383,26 @@ class Unum(object):
 
         return s, o
 
-    def as_unit(self, new_unit_symbol):
+    def as_unit(self, target_unit):
         """
-        Convierte el valor actual a la nueva unidad especificada por el símbolo.
-
-        :param new_unit_symbol: El símbolo de la nueva unidad.
-        :return: Un nuevo objeto `Unum` con el valor convertido a la nueva unidad.
-        :raises IncompatibleUnitsError: Si las unidades no son compatibles.
+        Convertir la unidad actual a la unidad objetivo.
+        
+        :param target_unit: Unidad objetivo a la que se desea convertir.
+        :return: Un nuevo Unum con la unidad convertida.
         """
-        # Asegurarse de que la unidad sea básica o derivada
-        if new_unit_symbol not in UNIT_TABLE:
-            raise ValueError(f"La unidad '{new_unit_symbol}' no está definida en la tabla de unidades.")
+        if not isinstance(target_unit, Unum):
+            raise ValueError("target_unit debe ser una instancia de Unum")
 
-        # Obtener la definición de la nueva unidad
-        new_unit_definition = UNIT_TABLE[new_unit_symbol]
+        # Obtener la definición de la unidad objetivo
+        target_definition = UNIT_TABLE.get_definition(target_unit)
 
-        # Crear un nuevo Unum con la unidad deseada
-        new_value = self.copy(True)  # Copia el valor normalizado
-        new_value = new_value.cast_unit(new_unit_definition.definition)
+        # Verificar si la unidad objetivo está en la tabla de unidades
+        if target_definition is None:
+            raise ValueError(f"La unidad {target_unit} no está definida")
 
-        return new_value
+        # Realizar la conversión
+        converted_value = self.number() * (1 / target_definition.number())
+        return Unum(converted_value, target_unit._unit)
   
 
     def format_number(self, func):
