@@ -403,6 +403,38 @@ class Unum(object):
         # Realizar la conversión
         converted_value = self.number() * (1 / target_definition.number())
         return Unum(converted_value, target_unit._unit)
+
+    def as_unit(self, target_unit):
+        """
+        Convertir la unidad actual a la unidad objetivo.
+    
+        :param target_unit: Unidad objetivo a la que se desea convertir.
+        :return: Un nuevo Unum con la unidad convertida.
+        """
+        # Asegúrate de que target_unit sea un objeto Unum o una cadena de texto
+        if isinstance(target_unit, str):
+            target_unit = UNIT_TABLE[target_unit]
+
+        if not isinstance(target_unit, Unum):
+            raise ValueError("target_unit debe ser una instancia de Unum o un string correspondiente a una unidad")
+
+        # Normaliza las unidades
+        self.simplify_unit()
+        target_unit.simplify_unit()
+
+        # Verifica si las unidades son compatibles
+        if not self._unit or not target_unit._unit:
+            raise ValueError("No se puede convertir a una unidad sin definición")
+
+        # Encuentra el factor de conversión entre las dos unidades
+        s, o = self.match_units(target_unit)
+
+        if not o._unit:
+          raise IncompatibleUnitsError(self, target_unit)
+
+        # Realiza la conversión
+        converted_value = s._value / o._value
+        return Unum(converted_value, target_unit._unit)
   
 
     def format_number(self, func):
