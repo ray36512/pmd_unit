@@ -1,5 +1,4 @@
 
-##hola
 
 from __future__ import division, unicode_literals
 
@@ -383,6 +382,28 @@ class Unum(object):
             s, o = o, s
 
         return s, o
+
+    def as_unit(self, new_unit_symbol):
+        """
+        Convierte el valor actual a la nueva unidad especificada por el símbolo.
+
+        :param new_unit_symbol: El símbolo de la nueva unidad.
+        :return: Un nuevo objeto `Unum` con el valor convertido a la nueva unidad.
+        :raises IncompatibleUnitsError: Si las unidades no son compatibles.
+        """
+        # Asegurarse de que la unidad sea básica o derivada
+        if new_unit_symbol not in UNIT_TABLE:
+            raise ValueError(f"La unidad '{new_unit_symbol}' no está definida en la tabla de unidades.")
+
+        # Obtener la definición de la nueva unidad
+        new_unit_definition = UNIT_TABLE[new_unit_symbol]
+
+        # Crear un nuevo Unum con la unidad deseada
+        new_value = self.copy(True)  # Copia el valor normalizado
+        new_value = new_value.cast_unit(new_unit_definition.definition)
+
+        return new_value
+  
 
     def format_number(self, func):
         return func(self._value)
