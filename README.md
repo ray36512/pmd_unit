@@ -24,7 +24,7 @@ Installation
 If you have not git yet, first install it from https://git-scm.com/downloads, and then run
 
 ```{r, engine='bash', count_lines}
-    pip install git+https://github.com/trzemecki/Unum.git
+    pip install --upgrade git+https://github.com/ray36512/pmd_unit.git
 ```
 
 ### Alternatively
