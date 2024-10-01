@@ -1,5 +1,9 @@
-Unum 5.0 (fork) - Units in Python 
+pmd_unit 
 ==========================
+
+&copy; 2000-2003 Pierre Denis<br/>
+&copy; 2009-2010 Chris MacLeod<br/>
+&copy; 2016-2017 Leszek Trzemecki<br/>
 &copy; 2024 Carlos Raymundo<br/>
 
 
