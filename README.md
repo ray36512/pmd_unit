@@ -7,7 +7,7 @@ pmd_unit
 Version info
 -------------------------------------------------------------------------
 
-  - This repository is cloned from: Leszek Trzemecki https://github.com/trzemecki
+  
   - Version is not compatible with previous `unum` (**no backward compatibility**)
   - Unicode using by default; units exponents are displaying using unicode superscript
   - New module function allowing using alternatively `float`, `int` or `Unum`
